@@ -1,0 +1,10 @@
+{
+  "manifest_version": 2,
+  "name": "React/Redux Chrome Extention",
+  "description": "React, Chrome, and Redux boilerplate",
+  "version": "0.0.0.1",
+  "browser_action": {
+    "default_title": "React/Redux Chrome Extention",
+    "default_popup": "popup.html"
+  }
+}
