@@ -8,6 +8,7 @@ import sourcemaps from "gulp-sourcemaps";
 import autoprefixer from "gulp-autoprefixer";
 import minify from "gulp-minify-css";
 import rename from "gulp-rename";
+import plumber from 'gulp-plumber';
 
 const plugins = loadPlugins();
 
@@ -26,6 +27,7 @@ gulp.task("popup-js", ["clean"], cb => {
 gulp.task("popup-html", ["clean"], () => {
   return gulp
     .src("popup/src/index.html")
+    .pipe(plumber())
     .pipe(plugins.rename("popup.html"))
     .pipe(gulp.dest("./build"));
 });
@@ -34,6 +36,7 @@ gulp.task("build-css", function() {
   console.log("buidling css..");
   gulp
     .src("./styles/main.scss")
+    .pipe(plumber())
     .pipe(sourcemaps.init())
     .pipe(sass().on("error", sass.logError))
     .pipe(
@@ -53,7 +56,7 @@ gulp.task("build-css", function() {
 });
 
 gulp.task("copy-manifest", ["clean"], () => {
-  return gulp.src("manifest.json").pipe(gulp.dest("./build"));
+  return gulp.src("manifest.json").pipe(plumber()).pipe(gulp.dest("./build"));
 });
 
 gulp.task("clean", cb => {
